@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="26">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>0</ID>
+      <Description>"Ranger Max Armor"</Description>
+      <LastState Value="5673" RealAddress="E37C171C50"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>EDF41.exe+CC84A0</Address>
+      <Offsets>
+        <Offset>25F0</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>31</ID>
+      <Description>"Ranger Current Armor"</Description>
+      <LastState Value="5673" RealAddress="E37C171D1C"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>EDF41.exe+CC84A0</Address>
+      <Offsets>
+        <Offset>26BC</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>2</ID>
+      <Description>"Wing Diver Max Armor"</Description>
+      <LastState Value="2518" RealAddress="E37C171C54"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>EDF41.exe+CC84A0</Address>
+      <Offsets>
+        <Offset>25F4</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>5</ID>
+      <Description>"Wing Diver Current Armor"</Description>
+      <LastState Value="2518" RealAddress="E37C171D20"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>EDF41.exe+CC84A0</Address>
+      <Offsets>
+        <Offset>26C0</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>3</ID>
+      <Description>"Air Raider Max Armor"</Description>
+      <LastState Value="5132" RealAddress="E37C171C58"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>EDF41.exe+CC84A0</Address>
+      <Offsets>
+        <Offset>25F8</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>6</ID>
+      <Description>"Air Raider Current Armor"</Description>
+      <LastState Value="5132" RealAddress="E37C171D24"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>EDF41.exe+CC84A0</Address>
+      <Offsets>
+        <Offset>26C4</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>4</ID>
+      <Description>"Fencer Max Armor"</Description>
+      <LastState Value="3860" RealAddress="E37C171C5C"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>EDF41.exe+CC84A0</Address>
+      <Offsets>
+        <Offset>25FC</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>7</ID>
+      <Description>"Fencer Current Armor"</Description>
+      <LastState Value="3860" RealAddress="E37C171D28"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>EDF41.exe+CC84A0</Address>
+      <Offsets>
+        <Offset>26C8</Offset>
+      </Offsets>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>
