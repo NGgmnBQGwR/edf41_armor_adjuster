@@ -1,0 +1,70 @@
+{
+  Game : EDF41.exe
+  Version:
+  Date : 2016-11-13
+  Author : user
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(LootArmorWeps,EDF41.exe,0F 2F C2 76 68) // should be unique
+alloc(newmem,$1000,LootArmorWeps)
+
+label(code)
+label(return)
+
+newmem:
+ cmp [rdi+00000098],1 //lootbox: armor=1,wep=0,hp=2=3
+ jne code //// if not armor, jump to the original code
+ comiss xmm0,xmm2 //check if loot crate is nearby
+ ja EDF41.exe+1AEA4C //use reverse jump that evalutates crates as always "nearby"
+ jmp return
+
+code:
+ comiss xmm0,xmm2
+ jna EDF41.exe+1AEA4C
+ jmp return
+
+LootArmorWeps:
+ jmp newmem 
+return:
+registersymbol(LootArmorWeps)
+
+[DISABLE]
+
+LootArmorWeps:
+ db 0F 2F C2 76 68
+
+unregistersymbol(LootArmorWeps)
+dealloc(newmem) 
+
+{ 
+// ORIGINAL CODE - INJECTION POINT: "EDF41.exe"+1AE9DF 
+
+"EDF41.exe"+1AE9B2: F3 0F 10 4C 24 28 - movss xmm1,[rsp+28] 
+"EDF41.exe"+1AE9B8: F3 0F 59 D2 - mulss xmm2,xmm2 
+"EDF41.exe"+1AE9BC: F3 41 0F 5C 47 04 - subss xmm0,[r15+04] 
+"EDF41.exe"+1AE9C2: F3 41 0F 5C 4F 08 - subss xmm1,[r15+08] 
+"EDF41.exe"+1AE9C8: F3 0F 59 C0 - mulss xmm0,xmm0 
+"EDF41.exe"+1AE9CC: F3 0F 59 C9 - mulss xmm1,xmm1 
+"EDF41.exe"+1AE9D0: F3 0F 58 D0 - addss xmm2,xmm0 
+"EDF41.exe"+1AE9D4: 0F 28 C6 - movaps xmm0,xmm6 
+"EDF41.exe"+1AE9D7: F3 0F 59 C6 - mulss xmm0,xmm6 
+"EDF41.exe"+1AE9DB: F3 0F 58 D1 - addss xmm2,xmm1 
+// ---------- INJECTING HERE ---------- 
+"EDF41.exe"+1AE9DF: 0F 2F C2 - comiss xmm0,xmm2 
+"EDF41.exe"+1AE9E2: 76 68 - jna EDF41.exe+1AEA4C 
+// ---------- DONE INJECTING ---------- 
+"EDF41.exe"+1AE9E4: 48 8B 05 B5 9A B1 00 - mov rax,[EDF41.exe+CC84A0] 
+"EDF41.exe"+1AE9EB: 8B 48 38 - mov ecx,[rax+38] 
+"EDF41.exe"+1AE9EE: 83 F9 FF - cmp ecx,-01 
+"EDF41.exe"+1AE9F1: 74 31 - je EDF41.exe+1AEA24 
+"EDF41.exe"+1AE9F3: 48 8B 40 20 - mov rax,[rax+20] 
+"EDF41.exe"+1AE9F7: 48 8B 0C C8 - mov rcx,[rax+rcx*8] 
+"EDF41.exe"+1AE9FB: 48 8B 51 10 - mov rdx,[rcx+10] 
+"EDF41.exe"+1AE9FF: 48 63 42 08 - movsxd rax,dword ptr [rdx+08] 
+"EDF41.exe"+1AEA03: 83 7C 10 5C 00 - cmp dword ptr [rax+rdx+5C],00 
+"EDF41.exe"+1AEA08: 0F 95 C0 - setne al
+}
