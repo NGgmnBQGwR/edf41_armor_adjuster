@@ -8,7 +8,6 @@ import struct
 
 import win32api
 import win32con
-import win32com.client as wincl
 import win32gui
 import win32process
 
@@ -213,11 +212,6 @@ class EDFProcessHandle():
         win32api.CloseHandle(self.process_handle)
 
 
-def speech_notification(text):
-    speak = wincl.Dispatch("SAPI.SpVoice")
-    return speak.Speak(text)
-
-
 def backup_save():
     archive_name = "backup_{}.zip".format(datetime.datetime.now().strftime("%Y_%m_%d__%H_%M_%S_%f"))
 
@@ -277,7 +271,6 @@ def main():
             return
 
         helper = EDFMemoryEditorHelper(process_handle, edf_module_base_address)
-        speech_notification("ok")
         if helper.adjust_armor():
             input("Done. Press <Enter> to quit.")
         else:
