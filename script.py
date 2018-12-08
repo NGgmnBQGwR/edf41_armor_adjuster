@@ -195,9 +195,9 @@ class EDFMemoryEditorHelper(object):
 
     def adjust_armor(self):
         if self._is_first_launch():
-            self._initial_armor_adjustment()
+            return self._initial_armor_adjustment()
         else:
-            self._subsequent_armor_adjustment()
+            return self._subsequent_armor_adjustment()
 
 
 class EDFProcessHandle():
