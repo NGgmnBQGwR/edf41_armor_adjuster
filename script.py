@@ -123,6 +123,12 @@ class EDFMemoryEditorHelper(object):
         self.WriteProcessMemory(self.process_handle.handle, address, ctypes.byref(ctypes.c_long(value)), 4, ctypes.byref(bytesWrote))
         return bytesWrote.value
 
+    def _confirm_adjustment(self):
+        result = input("Continue with armor adjustment? [y/n]:")
+        if result.strip().lower() == 'y':
+            return True
+        return False
+
     def print_armor_info(self):
         print("Ranger: {}/{}\n"
         "Wing Diver: {}/{}\n"
@@ -137,6 +143,9 @@ class EDFMemoryEditorHelper(object):
     def _initial_armor_adjustment(self):
         print("Armor before complete re-adjustment:")
         self.print_armor_info()
+
+        if not self._confirm_adjustment():
+            return False
 
         all_armor = self._ranger_max_armor + self._wing_diver_max_armor + self._air_rider_max_armor + self._fencer_max_armor
         self._ranger_max_armor = all_armor
@@ -154,9 +163,14 @@ class EDFMemoryEditorHelper(object):
         with open(self.initial_adjustment_flag_filepath, 'wb') as out:
             out.write(b'\x00')
 
+        return True
+
     def _subsequent_armor_adjustment(self):
         print("Armor before adjustment:")
         self.print_armor_info()
+
+        if not self._confirm_adjustment():
+            return False
 
         previous_min_armor = min(self._ranger_max_armor, self._wing_diver_max_armor, self._air_rider_max_armor, self._fencer_max_armor)
 
@@ -177,6 +191,8 @@ class EDFMemoryEditorHelper(object):
 
         print("Armor after adjustment:")
         self.print_armor_info()
+
+        return True
 
     def adjust_armor(self):
         if self._is_first_launch():
@@ -261,10 +277,11 @@ def main():
             return
 
         helper = EDFMemoryEditorHelper(process_handle, edf_module_base_address)
-        helper.adjust_armor()
-
         speech_notification("ok")
-        input("Done. Press <Enter> to quit.")
+        if helper.adjust_armor():
+            input("Done. Press <Enter> to quit.")
+        else:
+            input("No changes performed. Press <Enter> to quit.")
 
 
 if __name__ == "__main__":
